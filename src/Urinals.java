@@ -4,14 +4,30 @@ import java.io.*;
 import java.net.URL;
 
 public class Urinals {
-    public static void ReadFile() {
-        ClassLoader classLoader = Urinals.class.getClass().getClassLoader();
+    public  String readFile() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        ClassLoader classLoader = this.getClass().getClassLoader();
         URL fileURL = classLoader.getResource("urinal.dat");
         if(fileURL != null)
         {
             File file = new File(fileURL.getFile());
+            InputStream in = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line + System.lineSeparator());
+            }
+
         }
 
+        return sb.toString();
+
+    }
+
+    public static void fileProcess() throws IOException {
+        Urinals urinals = new Urinals();
+        String ans  = urinals.readFile();
+        System.out.println(ans);
     }
 
     public static int countUrinals(String str)
@@ -65,11 +81,11 @@ public class Urinals {
     }
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
 
         boolean check = goodString("");
         System.out.println(check);
+        fileProcess();
 
 
     }
