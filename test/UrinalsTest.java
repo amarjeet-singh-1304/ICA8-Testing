@@ -32,13 +32,24 @@ class UrinalsTest {
     }
 
     @Test
-    @DisplayName("====== Amarjeet Singh == Test countUrinals =======")
+    @DisplayName("====== Amarjeet Singh == Test countUrinals(Normal Case) =======")
     void countUrinals()
     {
         int count = Urinals.countUrinals("10001");
         assertEquals(1, count);
 
     }
+    @Test
+    @DisplayName("====== Amarjeet Singh == Test countUrinals(New Test Case) =======")
+    void countUrinals1()
+    {
+        int count = Urinals.countUrinals("00000");
+        assertEquals(3, count);
+    }
+
+
+
+
 
 
 

@@ -9,6 +9,11 @@ public class Urinals {
         StringBuilder stringBuilder = new StringBuilder(str);
         int count = 0;
 
+        if(stringBuilder.charAt(1) == '0' && stringBuilder.charAt(0) == '0') {
+            stringBuilder.setCharAt(0, '1');
+            count = count + 1;
+        }
+
         for(int i = 1; i< str.length() -1; i++)
         {
             if(stringBuilder.charAt(i-1) == '0' && stringBuilder.charAt(i) == '0' &&
@@ -19,6 +24,12 @@ public class Urinals {
                 count = count + 1;
             }
 
+        }
+
+        if(stringBuilder.charAt(stringBuilder.length()-1) == '0' && stringBuilder.charAt(stringBuilder.length()-2) == '0')
+        {
+            stringBuilder.setCharAt(stringBuilder.length()-1, '1');
+            count = count +1;
         }
 
         return count;
