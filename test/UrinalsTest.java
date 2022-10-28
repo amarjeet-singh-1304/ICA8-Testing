@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.io.File;
+import java.net.URL;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UrinalsTest {
@@ -46,6 +49,18 @@ class UrinalsTest {
         int count = Urinals.countUrinals("00000");
         assertEquals(3, count);
     }
+
+    @Test
+    @DisplayName("====== Amarjeet Singh == Test Case for File Exists =======")
+    void fileNotFound()  {
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        URL fileURL = classLoader.getResource("urinal.dat");
+        assert fileURL != null;
+        File file = new File(fileURL.getFile());
+        assertTrue(file.exists());
+    }
+
+
 
 
 

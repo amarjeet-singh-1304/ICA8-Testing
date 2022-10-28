@@ -1,8 +1,18 @@
 //Author - Amarjeet Singh
 
-import java.util.Scanner;
+import java.io.*;
+import java.net.URL;
 
 public class Urinals {
+    public static void ReadFile() {
+        ClassLoader classLoader = Urinals.class.getClass().getClassLoader();
+        URL fileURL = classLoader.getResource("urinal.dat");
+        if(fileURL != null)
+        {
+            File file = new File(fileURL.getFile());
+        }
+
+    }
 
     public static int countUrinals(String str)
     {
