@@ -4,7 +4,7 @@ public class urinals {
 
     public static boolean goodString(String str)
     {
-        if(str.replaceAll("\\s", "").length() == 0)
+        if(str.replaceAll("\\s", "").length() == 0 || str.replaceAll("\\s", "").length() >=21 )
             return false;
         boolean check = true;
         for(int i = 0; i < str.length()-1; i++)

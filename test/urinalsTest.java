@@ -26,6 +26,14 @@ class urinalsTest {
         assertFalse(check1);
     }
 
+    @Test
+    @DisplayName("====== Amarjeet Singh == Test goodString Method(String Length >20) =======")
+    void checkStringLength() {
+        boolean check1 = urinals.goodString("0101010101010101010101");
+        assertFalse(check1);
+    }
+
+
 
 
 }
