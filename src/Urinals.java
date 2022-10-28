@@ -2,32 +2,58 @@
 
 import java.io.*;
 import java.net.URL;
+import java.util.Scanner;
+
 
 public class Urinals {
-    public  String readFile() throws IOException {
+    public  static String readFile(String filename) throws IOException {
+
+
         StringBuilder sb = new StringBuilder();
-        ClassLoader classLoader = this.getClass().getClassLoader();
-        URL fileURL = classLoader.getResource("urinal.dat");
-        if(fileURL != null)
-        {
-            File file = new File(fileURL.getFile());
-            InputStream in = new FileInputStream(file);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line + System.lineSeparator());
+        ClassLoader classLoader = Urinals.class.getClass().getClassLoader();
+        URL fileURL = classLoader.getResource(filename);
+        if (fileURL != null) {
+                File file = new File(fileURL.getFile());
+                InputStream in = new FileInputStream(file);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    boolean check = goodString(line);
+                    if (check) {
+                        sb.append(countUrinals(line) + System.lineSeparator());
+                    } else {
+                        sb.append(-1 + System.lineSeparator());
+                    }
+                }
+
             }
-
-        }
-
         return sb.toString();
 
     }
 
+
+
+    public static void writeFile(String outputStr) throws IOException {
+
+        File outFile = new File("resources/rule.txt");
+        int i = 0;
+        while(outFile.exists())
+        {
+            i++;
+            outFile = new File("resources/rule" + i + ".txt");
+        }
+        FileWriter fw = new FileWriter(i == 0 ? "resources/rule.txt":"resources/rule" + i + ".txt", true);
+        fw.write(outputStr);
+        fw.close();
+
+
+    }
+
+
     public static void fileProcess() throws IOException {
         Urinals urinals = new Urinals();
-        String ans  = urinals.readFile();
-        System.out.println(ans);
+        String ans  = urinals.readFile("urinal.dat");
+        urinals.writeFile(ans);
     }
 
     public static int countUrinals(String str)
@@ -83,9 +109,37 @@ public class Urinals {
 
     public static void main(String[] args) throws IOException {
 
-        boolean check = goodString("");
-        System.out.println(check);
-        fileProcess();
+        Scanner scanner  = new Scanner(System.in);
+        System.out.println("Enter a choice to take input: \n1. Keyboard \n2. File");
+        int inputMode = scanner.nextInt();
+        if(inputMode == 1)
+        {
+            boolean exitLoop = false;
+            while (!exitLoop) {
+                System.out.println("Please Enter the String");
+                String input = scanner.next();
+
+                if (input.equals("-1")) {
+                    exitLoop = true;
+                    System.exit(0);
+                }
+                boolean check = goodString(input);
+                if(check)
+                {
+                    int count = countUrinals(input);
+                    System.out.println(count);
+                }
+                else
+                {
+                    System.out.println("-1");
+
+                }
+            }
+        }
+
+        else if(inputMode == 2) {
+            fileProcess();
+        }
 
 
     }

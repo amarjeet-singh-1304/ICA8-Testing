@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.io.File;
+
+import java.io.*;
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,16 +64,24 @@ class UrinalsTest {
     @DisplayName("====== Amarjeet Singh == Test Case for Non Empty File =======")
     void emptyFile()  {
         ClassLoader classLoader = this.getClass().getClassLoader();
-        File file = new File(classLoader.getResource("urinal.dat").getFile());
+        URL fileURL = classLoader.getResource("urinal.dat");
+        assert fileURL != null;
+        File file = new File(fileURL.getFile());
         assertTrue(file.length() != 0);
     }
 
-
-
-
-
-
-
+    @Test
+    @DisplayName("====== Amarjeet Singh == Test Case for IO Exception =======")
+    void exceptionCheck() throws IOException {
+        try {
+            String abc = Urinals.readFile("urinal.dat");
+            assert abc != null;
+        }
+        catch (Exception e )
+        {
+            System.out.println("fcatched exception");
+        }
+    }
 
 
 
