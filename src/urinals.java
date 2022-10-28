@@ -6,8 +6,19 @@ public class urinals {
     {
         if(str.replaceAll("\\s", "").length() == 0)
             return false;
+        boolean check = true;
+        for(int i = 0; i < str.length()-1; i++)
+        {
+            if(str.charAt(i) == '0')
+                continue;
+            else
+            if (str.charAt(i) == '1' && str.charAt(i+1) == str.charAt(i))
+            {
+                check = false;
+            }
+        }
 
-        return true;
+        return check;
 
     }
 
