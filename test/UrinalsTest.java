@@ -20,7 +20,7 @@ class UrinalsTest {
     @Test
     @DisplayName("====== Amarjeet Singh == Test goodString Method(Bad String) =======")
     void checkBadString() {
-        boolean check1 = Urinals.goodString("01011");
+        boolean check1 = Urinals.goodString("0101100");
         assertFalse(check1);
     }
 
@@ -31,6 +31,14 @@ class UrinalsTest {
         assertFalse(check1);
     }
 
+    @Test
+    @DisplayName("====== Amarjeet Singh == Test countUrinals =======")
+    void countUrinals()
+    {
+        int count = Urinals.countUrinals("10001");
+        assertEquals(1, count);
+
+    }
 
 
 
